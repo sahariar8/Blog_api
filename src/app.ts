@@ -1,11 +1,16 @@
 import express from 'express';
+import { postRouter } from './modules/post/post.router';
 
 const app = express();
 
 app.use(express.json());
 
+
+// Sample route
+
+app.use('/posts', postRouter);
 app.get('/', (req, res) => {
-    res.send('Hello, World!');
+    res.send('Hello,Shahariar!');
 });
 
 export { app };
