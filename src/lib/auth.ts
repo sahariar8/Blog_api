@@ -1,3 +1,4 @@
+import { email } from './../../node_modules/zod/src/v4/core/regexes';
 import { betterAuth } from "better-auth";
 import { prismaAdapter } from "better-auth/adapters/prisma";
 import { prisma } from "./prisma";
@@ -17,5 +18,12 @@ export const auth = betterAuth({
   },
   emailAndPassword: {
     enabled: true,
+    autoSignIn: false,
+    requireEmailVerification: true
+  },
+  emailVerification: {
+    sendVerificationEmail: async ( { user, url, token }, request) => {
+      console.log(`Send email to ${user.email} with url: ${url} and token: ${token}`);
+    },
   },
 });
